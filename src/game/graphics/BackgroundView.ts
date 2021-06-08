@@ -29,7 +29,7 @@ export class BackgroundView extends Container {
             const padding = 0;
             
             const options: Options = {
-                fill: 'black',
+                fill: 'red',
                 strokeWidth: .1,
                 fillStyle: 'zigzag',
                 hachureAngle: -80,

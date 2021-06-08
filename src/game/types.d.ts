@@ -11,3 +11,13 @@
  */
 declare module '*.mp3';
 declare module '*.ogg';
+
+declare module '*.png' {
+    const value: string;
+    export default value;
+}
+
+declare module '*.json' {
+    const value: string;
+    export default value;
+}

@@ -1,38 +1,26 @@
 import { ListIteratingSystem } from '@ash.ts/ash';
+import Bunny from '../components/Bunny';
 import { KeyPoll } from '../KeyPoll';
-import { MotionControlNode } from '../nodes';
+import { BunnyControlNode } from '../nodes';
 import { TouchPoll } from '../TouchPoll';
 
-export class MotionControlSystem extends ListIteratingSystem<MotionControlNode> {
+export class MotionControlSystem extends ListIteratingSystem<BunnyControlNode> {
     private keyPoll: KeyPoll;
     private touchPoll: TouchPoll;
 
     public constructor(keyPoll: KeyPoll, touchPoll: TouchPoll) {
-        super(MotionControlNode);
+        super(BunnyControlNode);
         this.keyPoll = keyPoll;
         this.touchPoll = touchPoll;
     }
 
-    public updateNode(node: MotionControlNode, time: number): void {
+    public updateNode(node: BunnyControlNode, time: number): void {
         const { control } = node;
-        const { position } = node;
         const { motion } = node;
 
-        if (this.keyPoll.isDown(control.left) || this.touchPoll.left) {
-            position.rotation -= control.rotationRate * time;
-            motion.velocityX += Math.cos(position.rotation) * control.accelerationRate / 2 * time;
-            motion.velocityY += Math.sin(position.rotation) * control.accelerationRate / 2 * time;
-        }
-
-        if (this.keyPoll.isDown(control.right) || this.touchPoll.right) {
-            position.rotation += control.rotationRate * time;
-            motion.velocityX += Math.cos(position.rotation) * control.accelerationRate / 2 * time;
-            motion.velocityY += Math.sin(position.rotation) * control.accelerationRate / 2 * time;
-        }
-
-        if (this.keyPoll.isDown(control.accelerate) || this.touchPoll.top) {
-            motion.velocityX += Math.cos(position.rotation) * control.accelerationRate * time;
-            motion.velocityY += Math.sin(position.rotation) * control.accelerationRate * time;
+        if (this.keyPoll.isDown(control.top) || this.touchPoll.click) {
+            motion.velocityY = -1300;
+            node.bunny.fsm.changeState(Bunny.FLYING);
         }
     }
 }

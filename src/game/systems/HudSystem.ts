@@ -1,4 +1,3 @@
-import storeGameModule from '@/vuex/storeGameModule';
 import { Engine, NodeList, System } from '@ash.ts/ash';
 import { GameState } from '../components';
 import { GameNode } from '../nodes';
@@ -20,31 +19,31 @@ export class HudSystem extends System {
             return;
         }
 
-        if (storeGameModule.getters.state != this.gameState.state) {
-            if (
-                (this.gameState.state == GameState.WAIT_FOR_START || this.gameState.state == GameState.FINISH)
-                && storeGameModule.getters.state == GameState.PLAY
-            ) {
-                this.gameState.setForStart();
-                state.setForStart();
-            } else if (storeGameModule.getters.state == GameState.FINISH) {
-                this.gameState.setForFinish();
-                state.setForFinish();
-            } else {
-                this.gameState.state = storeGameModule.getters.state;
-                state.state = this.gameState.state;
-            }
-        } else {
-            if (state.state != this.gameState.state) {
-                this.gameState.state = state.state;
-                storeGameModule.mutations.setState(state.state);
-            }
+        // if (storeGameModule.getters.state != this.gameState.state) {
+        //     if (
+        //         (this.gameState.state == GameState.WAIT_FOR_START || this.gameState.state == GameState.FINISH)
+        //         && storeGameModule.getters.state == GameState.PLAY
+        //     ) {
+        //         this.gameState.setForStart();
+        //         state.setForStart();
+        //     } else if (storeGameModule.getters.state == GameState.FINISH) {
+        //         this.gameState.setForFinish();
+        //         state.setForFinish();
+        //     } else {
+        //         this.gameState.state = storeGameModule.getters.state;
+        //         state.state = this.gameState.state;
+        //     }
+        // } else {
+        //     if (state.state != this.gameState.state) {
+        //         this.gameState.state = state.state;
+        //         storeGameModule.mutations.setState(state.state);
+        //     }
     
-            storeGameModule.mutations.setLives(state.lives);
-            storeGameModule.mutations.setLevel(state.level);
-            storeGameModule.mutations.setShots(state.shots);
-            storeGameModule.mutations.setHits(state.hits);
-        }
+        //     storeGameModule.mutations.setLives(state.lives);
+        //     storeGameModule.mutations.setLevel(state.level);
+        //     storeGameModule.mutations.setShots(state.shots);
+        //     storeGameModule.mutations.setHits(state.hits);
+        // }
 
         this.gameState.update(state);
     }

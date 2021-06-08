@@ -1,11 +1,12 @@
 export class GameState {
 
-    public static WAIT_FOR_START = 'wait';
+    public static INTRO = 'intro';
     public static PLAY = 'play';
     public static PAUSE = 'pause';
-    public static FINISH = 'finish';
+    public static GAME_END = 'end';
+    public static LEADERS = 'leaders';
 
-    public state = GameState.WAIT_FOR_START;
+    public state = GameState.INTRO;
 
     public lives = 0;
     public level = 0;
@@ -21,7 +22,7 @@ export class GameState {
     }
 
     public setForFinish(): void {
-        this.state = GameState.FINISH;
+        this.state = GameState.GAME_END;
     }
 
     public update(gameState: GameState): void {

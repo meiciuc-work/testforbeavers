@@ -9,7 +9,7 @@ export class TouchPoll {
     private mouseMoveX = 0;
     private mouseMoveY = 0;
     
-    private clickTimeout = 200;
+    private clickTimeout = 500;
 
     private distance = 0;
 
@@ -17,7 +17,6 @@ export class TouchPoll {
     private mouseRight = false;
     private mouseTop = false;
     private mouseBottom = false;
-    
 
     public constructor() {
         window.addEventListener('mousedown', this.handleMouseDown);
@@ -30,15 +29,6 @@ export class TouchPoll {
     }
 
     private handleTouchStart = (event: TouchEvent) => {
-        console.log('handleTouchStart', event, event.touches)
-        // event.preventDefault();
-
-        for (let i = 0; i < event.touches.length; i++) {
-         console.log(i, (event.touches[i] as Touch).target)
-        //  console.log(i, (event.touches[i] as Touch).)
-            break;
-        }
-
         for (let i = 0; i < event.touches.length; i++) {
             this.mouseDown = true;
             this.mouseDownX = (event.touches[i] as Touch).clientX;
@@ -49,14 +39,12 @@ export class TouchPoll {
     }
 
     private handleTouchEnd = (event: TouchEvent) => {
-        // event.preventDefault();
         this.handleTouchMove(event);
         this.mouseDown = false;
         this.resetDirections();
     }
 
     private handleTouchMove = (event: TouchEvent) => {
-        // event.preventDefault();
         if (this.mouseDown) {
             for (let i = 0; i < event.touches.length; i++) {
                 this.mouseMoveX = event.touches[0].clientX;
@@ -82,7 +70,6 @@ export class TouchPoll {
     }
 
     private handleMouseDown = (event: MouseEvent) => {
-        // event.preventDefault();
         this.mouseDown = true;
         this.mouseDownX = event.clientX;
         this.mouseDownY = event.clientY;
@@ -90,14 +77,12 @@ export class TouchPoll {
     }
 
     private handleMouseUp = (event: MouseEvent) => {
-        // event.preventDefault();
         this.handleMouseMove(event);
         this.mouseDown = false;
         this.resetDirections();
     }
 
     private handleMouseMove = (event: MouseEvent) => {
-        // event.preventDefault();
         if (this.mouseDown) {
             this.mouseMoveX = event.clientX;
             this.mouseMoveY = event.clientY;

@@ -1,47 +1,30 @@
 import { defineNode } from '@ash.ts/ash';
 import {
   Animation,
-  Asteroid,
   Audio,
-  Bullet,
   Collision,
   DeathThroes,
   Display,
   GameState,
-  Gun,
-  GunControls,
   Motion,
   MotionControls,
   Position,
-  Spaceship,
   CameraShake,
-  MoveBackFromScreenEdge,
 } from './components';
+import { Barrier } from './components/Barrier';
+import Bunny from './components/Bunny';
+import { GUI } from './components/GUI';
+import Slope from './components/Slope';
 
 export const AnimationNode = defineNode({
   animation: Animation,
 }, 'AnimationNode');
 export type AnimationNode = InstanceType<typeof AnimationNode>;
 
-export const AsteroidCollisionNode = defineNode({
-  asteroid: Asteroid,
-  position: Position,
-  collision: Collision,
-  audio: Audio,
-}, 'AsteroidCollisionNode');
-export type AsteroidCollisionNode = InstanceType<typeof AsteroidCollisionNode>;
-
 export const AudioNode = defineNode({
   audio: Audio,
 }, 'AudioNode');
 export type AudioNode = InstanceType<typeof AudioNode>;
-
-export const BulletCollisionNode = defineNode({
-  bullet: Bullet,
-  position: Position,
-  collision: Collision,
-}, 'BulletCollisionNode');
-export type BulletCollisionNode = InstanceType<typeof BulletCollisionNode>;
 
 export const DeathThroesNode = defineNode({
   death: DeathThroes,
@@ -53,14 +36,6 @@ export const GameNode = defineNode({
 }, 'GameNode');
 export type GameNode = InstanceType<typeof GameNode>;
 
-export const GunControlNode = defineNode({
-  control: GunControls,
-  gun: Gun,
-  position: Position,
-  audio: Audio,
-}, 'GunControlNode');
-export type GunControlNode = InstanceType<typeof GunControlNode>;
-
 export const MotionControlNode = defineNode({
   control: MotionControls,
   position: Position,
@@ -71,7 +46,6 @@ export type MotionControlNode = InstanceType<typeof MotionControlNode>;
 export const MovementNode = defineNode({
   position: Position,
   motion: Motion,
-  moveBack: MoveBackFromScreenEdge,
 }, 'MovementNode');
 export type MovementNode = InstanceType<typeof MovementNode>;
 
@@ -81,21 +55,52 @@ export const RenderNode = defineNode({
 }, 'RenderNode');
 export type RenderNode = InstanceType<typeof RenderNode>;
 
-export const SpaceshipCollisionNode = defineNode({
-  spaceship: Spaceship,
+export const GUINode = defineNode({
+    position: Position,
+    display: GUI,
+  }, 'RenderNode');
+  export type GUINode = InstanceType<typeof GUINode>;
+
+export const BunnyControlNode = defineNode({
+    bunny: Bunny,
+    position: Position,
+    collision: Collision,
+    control: MotionControls,
+    motion: Motion,
+  //   audio: Audio,
+}, 'BunnyControlNode');
+export type BunnyControlNode = InstanceType<typeof BunnyControlNode>;
+
+export const BunnyCollisionNode = defineNode({
+  bunny: Bunny,
   position: Position,
   collision: Collision,
-  audio: Audio,
-}, 'SpaceshipCollisionNode');
-export type SpaceshipCollisionNode = InstanceType<typeof SpaceshipCollisionNode>;
-
-export const SpaceshipNode = defineNode({
-  spaceship: Spaceship,
-  position: Position,
-}, 'SpaceshipNode');
-export type SpaceshipNode = InstanceType<typeof SpaceshipNode>;
+//   audio: Audio,
+}, 'BunnyCollisionNode');
+export type BunnyCollisionNode = InstanceType<typeof BunnyCollisionNode>;
 
 export const CameraShakeNode = defineNode({
     shake: CameraShake,
   }, 'CameraShakeNode');
-  export type CameraShakeNode = InstanceType<typeof CameraShakeNode>;
+export type CameraShakeNode = InstanceType<typeof CameraShakeNode>;
+
+export const BunnyNode = defineNode({
+    bunny: Bunny,
+    position: Position,
+    motion: Motion,
+}, 'BunnyNode');
+export type BunnyNode = InstanceType<typeof BunnyNode>;
+
+export const SlopeNode = defineNode({
+    slope: Slope,
+    position: Position,
+}, 'SlopeNode');
+export type SlopeNode = InstanceType<typeof SlopeNode>;
+
+export const BarrierCollisionNode = defineNode({
+    barrier: Barrier,
+    position: Position,
+    collision: Collision,
+  //   audio: Audio,
+  }, 'BarrierCollisionNode');
+export type BarrierCollisionNode = InstanceType<typeof BarrierCollisionNode>;
